@@ -1,7 +1,7 @@
 FROM nodered/node-red as base
 ARG QEMU_ARCH
 USER root
-RUN apk add sqlite > 3.0.0
+RUN apk add sqlite grep
 USER node-red
 RUN curl -sL -o /data/settings.js https://raw.githubusercontent.com/radiosport-live/Node-Red-AutoScripts/master/settings.js 
 

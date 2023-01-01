@@ -21,12 +21,11 @@ jobs:
         releaseType: patch
         incrementPerCommit: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: 'change version'
-      uses: reedyuk/npm-version@1.1.1
-      with:
-        version: ${{ steps.versioning.outputs.version}}
-        package: "./"
-        git-tag-version: 'true'
+    - name: "GitHub Version Bumper"
+      uses: "kaangokdemir/github-version-bumper@master"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION_FILE_NAME: "package.json"
     - name: Next Release Number   
       run: echo "Generated version is ${{ steps.versioning.outputs.version}}"
     - name: Get Date

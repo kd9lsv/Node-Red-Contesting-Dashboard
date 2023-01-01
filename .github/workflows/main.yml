@@ -81,5 +81,6 @@ jobs:
             CONTEST_DASHBOARD_VERSION=${{ steps.meta.outpus.tags }}
             TAG_SUFFIX=${{ github.run_number }}
           push: true
-            
-          tags: ${{ IMAGE_NAME }}:${{ github.run_number }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          

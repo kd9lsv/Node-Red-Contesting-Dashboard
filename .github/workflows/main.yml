@@ -80,8 +80,8 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node }}
             BUILD_DATE=${{ steps.date.outputs.date }}
-            BUILD_REF=${{ env.GITHUB_SHA }}
+            BUILD_REF=${{ github.sha }}
             CONTEST_DASHBOARD_VERSION=${{ steps.meta.outpus.tags }}
-            TAG_SUFFIX=${{env.GITHUB_SHA}}
+            TAG_SUFFIX=${{github.run_number}}
             
           tags: ${{ steps.nrVersion.outputs.tags }}

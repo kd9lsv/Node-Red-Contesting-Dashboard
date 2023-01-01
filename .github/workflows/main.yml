@@ -62,7 +62,7 @@ jobs:
       - name: Get Date
         id: date
         run: echo "name=date::$(date +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
-        name: Login to Github Container Registry
+      - name: Login to Github Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io

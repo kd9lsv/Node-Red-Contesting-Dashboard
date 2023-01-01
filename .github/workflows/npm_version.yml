@@ -24,14 +24,22 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Next Release Number
       run: echo ${{ steps.versioning.outputs.version }}
-    - name: Generate Changelog
-      id: changelog
-      uses: jaywcjlove/changelog-generator@main
-      if: steps.versioning.outputs.version
+    - name: Get Date
+      id: date
+      run: echo "name=date::$(date +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
+    - name: Create an Tag
+      uses: simpleactions/create-tag@v1.0.0
       with:
-        head-ref: ${{steps.versioning.outputs.version}}
-        filter-author: (jaywcjlove|小弟调调™|dependabot\[bot\]|Renovate Bot)
-        filter: (^[\s]+?[R|r]elease)|(^[R|r]elease)
+        sha: ${{ github.sha }}
+        # The tag name
+        tag: ${{steps.versioning.outputs.version}}
+        # The message
+        message: ${{steps.versioning.outputs.version}} Update on ${{steps.date.outputs.date}}
+    - name: Generate changelog
+      id: changelog
+      uses: heinrichreimer/action-github-changelog-generator@v2.3
+      with:
+          token: ${{ secrets.GITHUB_TOKEN }} 
     - name: Create Release
       uses: ncipollo/release-action@v1
       if: steps.create_tag.outputs.successful
@@ -42,7 +50,6 @@ jobs:
         tag: ${{ steps.versioning.outputs.version }}
         body: |
           ```bash
-          See docker package for updated version ${{steps.create_tag.outputs.versionNumber}}
+          See docker package for updated version ${{steps.versioning.outputs.version}}
           ```
-          ${{ steps.changelog.outputs.compareurl }}
           ${{ steps.changelog.outputs.changelog }}

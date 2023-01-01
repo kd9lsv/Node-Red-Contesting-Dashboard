@@ -82,6 +82,6 @@ jobs:
             BUILD_DATE=${{ steps.date.outputs.date }}
             BUILD_REF=${{ github.sha }}
             CONTEST_DASHBOARD_VERSION=${{ steps.meta.outpus.tags }}
-            TAG_SUFFIX=${{github.run_number}}
+            TAG_SUFFIX=${{ github.run_number }}
             
-          tags: ${{ steps.nrVersion.outputs.tags }}
+          tags: ${{ github.run_number }}

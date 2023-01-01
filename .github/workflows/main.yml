@@ -23,8 +23,6 @@ jobs:
     env:
       # Setting the defaults up front
       LATEST_NODE: 16
-      DEFAULT_IMAGE: kd9lsv/node-red-contest-dashboard
-      DEV_IMAGE: kd9lsv/node-red-dev-contest-dashboard
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
     runs-on: ubuntu-latest

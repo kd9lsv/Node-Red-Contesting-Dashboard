@@ -21,6 +21,8 @@ jobs:
         releaseType: patch
         incrementPerCommit: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: "Checkout source code"
+      uses: "actions/checkout@v2"
     - name: "GitHub Version Bumper"
       uses: "kaangokdemir/github-version-bumper@master"
       env:

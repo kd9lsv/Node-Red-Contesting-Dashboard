@@ -25,6 +25,7 @@ jobs:
       uses: reedyuk/npm-version@1.1.1
       with:
         version: ${{ steps.versioning.outputs.version}}
+        package: '../'
         git-tag-version: 'true'
     - name: Next Release Number   
       run: echo "Generated version is ${{ steps.versioning.outputs.version}}"

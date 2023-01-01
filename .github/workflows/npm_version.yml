@@ -13,23 +13,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        path: master
-    - name: Auto Increment Semver Action
-      uses: MCKanpolat/auto-semver-action@1.0.5
-      id: versioning
-      with:
-        releaseType: patch
-        incrementPerCommit: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: "Checkout source code"
-      uses: "actions/checkout@v2"
-    - name: "GitHub Version Bumper"
-      uses: "kaangokdemir/github-version-bumper@master"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        VERSION_FILE_NAME: 'package.json'
-    - name: Next Release Number   
-      run: echo "Generated version is ${{ steps.versioning.outputs.version}}"
+        token : ${{ secrets.GITHUB_TOKEN }}
+    - run: git config --global user.name 'kd9lsv'
+    - run: git config --global user.email 'connor@kd9lsv.me'
+    - run: npm version patch -m "[RELEASE] %s"
+    - run: git push
     - name: Get Date
       id: date
       run: echo "name=date::$(date +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT

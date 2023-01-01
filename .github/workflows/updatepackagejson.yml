@@ -18,7 +18,7 @@ jobs:
       with:
         args: -u --packageFile package.json --loglevel verbose
     - name: Auto Increment Semver Action
-      uses: MCKanpolat/auto-semver-action@latest
+      uses: MCKanpolat/auto-semver-action@1.0.9
       id: versioning
       with:
         releaseType: patch

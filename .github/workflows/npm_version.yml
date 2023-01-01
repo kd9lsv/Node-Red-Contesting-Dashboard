@@ -16,7 +16,9 @@ jobs:
         token : ${{ secrets.GITHUB_TOKEN }}
     - run: git config --global user.name 'kd9lsv'
     - run: git config --global user.email 'connor@kd9lsv.me'
-    - run: npm version patch -m "[RELEASE] %s"
+    - name: version value
+      id: versioning
+      run: echo "name=version::$(npm version patch -m "[RELEASE] %s")" >> $GITHUB_OUTPUT
     - run: git push
     - name: Get Date
       id: date
@@ -29,7 +31,7 @@ jobs:
         # The tag name
         tag: v${{steps.versioning.outputs.version}}
         # The message
-        message: $npm_package_version Update on ${{steps.date.outputs.date}}
+        message: v${{steps.versioning.outputs.version}} Update on ${{steps.date.outputs.date}}
     - name: Generate changelog
       id: changelog
       uses: heinrichreimer/action-github-changelog-generator@v2.3

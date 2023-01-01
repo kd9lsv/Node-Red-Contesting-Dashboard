@@ -25,8 +25,8 @@ RUN cd /data/projects/Node-Red-Contesting-Dashboard && for branch in `git branch
 done
 
 RUN sqlite3 /usr/src/node-red/qsos < /data/schema.db
-COPY .config.projects.json /data
-COPY .config.users.json /data
+COPY docker/.config.projects.json /data
+COPY docker/.config.users.json /data
 ENV NODE_RED_ENABLE_PROJECTS=true
 HEALTHCHECK CMD curl http://localhost:1880/ || exit 1
 

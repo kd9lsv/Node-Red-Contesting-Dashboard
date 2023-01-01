@@ -33,7 +33,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         sha: ${{ github.sha }}
         # The tag name
-        tag: ${{steps.versioning.outputs.version}}
+        tag: v${{steps.versioning.outputs.version}}
         # The message
         message: ${{steps.versioning.outputs.version}} Update on ${{steps.date.outputs.date}}
     - name: Generate changelog

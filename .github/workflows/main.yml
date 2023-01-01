@@ -78,7 +78,7 @@ jobs:
         with:
           context: .
           platforms: linux/amd64, linux/arm64
-          file: docker/Dockerfile.nodered 
+          file: docker/Dockerfile 
           build-args: |
             NODE_VERSION=${{ matrix.node }}
             BUILD_DATE=${{ steps.date.outputs.date }}

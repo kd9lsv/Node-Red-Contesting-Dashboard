@@ -20,6 +20,7 @@ jobs:
       uses: pengyanb/npm-versioning-action@v1
       with:
         release-branch: "dev,master,aa0z"
+        package-json-path: package.json
     - name: dummy versioning usage
       run: echo "Generated version is \${{ steps.npmVersioning.outputs.version}}"
     - name: Next Release Number

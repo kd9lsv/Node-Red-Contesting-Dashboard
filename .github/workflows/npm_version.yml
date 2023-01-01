@@ -32,7 +32,7 @@ jobs:
         # The tag name
         tag: v${{env.npmversion}}
         # The message
-        message: v${{env.npmversion}} Update on ${{steps.date.outputs.date}}
+        message: ${{env.npmversion}} Update on ${{steps.date.outputs.date}}
     - name: Generate changelog
       id: changelog
       uses: heinrichreimer/action-github-changelog-generator@v2.3
@@ -40,12 +40,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }} 
     - name: Create Release
       uses: ncipollo/release-action@v1
-      if: steps.create_tag.outputs.successful
+      if: steps.changelog.outputs.changelog
       with:
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
         name: ${{env.npmversion}}
-        tag: v${{env.npmversion}}
+        tag: ${{env.npmversion}}
         body: |
           ```bash
           See docker package for updated version ${{env.npmversion}}

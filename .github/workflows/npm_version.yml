@@ -14,12 +14,13 @@ jobs:
       uses: actions/checkout@v3
       with:
         token : ${{ secrets.GITHUB_TOKEN }}
-    - run: git config --global user.name 'kd9lsv'
-    - run: git config --global user.email 'connor@kd9lsv.me'
     - name: version value
       id: versioning
-      run: echo "name=version::$(npm version patch -m "[RELEASE] %s")" >> $GITHUB_OUTPUT
-    - run: git push
+      run: |
+        git config --global user.name 'kd9lsv'
+        git config --global user.email 'connor@kd9lsv.me'
+        echo "npmversion=$(npm version patch -m "[RELEASE] %s")" >> $GITHUB_OUTPUT
+        git push
     - name: Get Date
       id: date
       run: echo "name=date::$(date +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
@@ -29,9 +30,9 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         sha: ${{ github.sha }}
         # The tag name
-        tag: v${{steps.versioning.outputs.version}}
+        tag: v${{env.npmversion}}
         # The message
-        message: v${{steps.versioning.outputs.version}} Update on ${{steps.date.outputs.date}}
+        message: v${{env.npmversion}} Update on ${{steps.date.outputs.date}}
     - name: Generate changelog
       id: changelog
       uses: heinrichreimer/action-github-changelog-generator@v2.3
@@ -43,10 +44,10 @@ jobs:
       with:
         allowUpdates: true
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: ${{ steps.versioning.outputs.version }}
-        tag: ${{ steps.versioning.outputs.version }}
+        name: ${{env.npmversion}}
+        tag: v${{env.npmversion}}
         body: |
           ```bash
-          See docker package for updated version ${{steps.versioning.outputs.version}}
+          See docker package for updated version ${{env.npmversion}}
           ```
           ${{ steps.changelog.outputs.changelog }}

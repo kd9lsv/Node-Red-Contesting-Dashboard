@@ -19,9 +19,8 @@ jobs:
       run: |
         git config --global user.name 'kd9lsv'
         git config --global user.email 'connor@kd9lsv.me'
-        echo "npmversion=$(npm version patch -m "[RELEASE] %s")" >> $GITHUB_OUTPUT
+        echo "npmversion=$(npm version patch -m "[RELEASE] %s")" >> $GITHUB_ENV
         git push
-    - run: printenv
     - name: Get Date
       id: date
       run: echo "name=date::$(date +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT

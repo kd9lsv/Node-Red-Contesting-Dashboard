@@ -40,8 +40,8 @@ LABEL org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.vcs-ref=${BUILD_REF} \
     org.label-schema.vcs-type="Git" \
     org.label-schema.vcs-url="https://github.com/kylekrieg/Node-Red-Contesting-Dashboard" \
-    org.label-schema.arch=${ARCH} \
-    authors="Connor Dickey KD9LSV, Kyle Krie AA0Z"
+    org.label-schema.arch=${QEMU_ARCH} \
+    authors="Connor Dickey KD9LSV, Kyle Krieg AA0Z"
 
 # You should add extra nodes via your package.json file but you can also add them here:
 #WORKDIR /usr/src/node-red

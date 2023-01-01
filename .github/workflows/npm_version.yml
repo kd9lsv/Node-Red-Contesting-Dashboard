@@ -3,7 +3,6 @@ on:
     branches:
       - master
     paths-ignore:
-      - '.github/**/*.yml'
       - '.gitignore'
 
 jobs:
@@ -15,16 +14,20 @@ jobs:
       uses: actions/checkout@v3
       with:
         path: master
-    - name: npm versioning
+    - name: Auto Increment Semver Action
+      uses: MCKanpolat/auto-semver-action@1.0.5
       id: versioning
-      uses: pengyanb/npm-versioning-action@v1
       with:
-        release-branch: "dev,master,aa0z"
-        package-json-path: package.json
-    - name: dummy versioning usage
-      run: echo "Generated version is \${{ steps.npmVersioning.outputs.version}}"
-    - name: Next Release Number
-      run: echo ${{ steps.versioning.outputs.version }}
+        releaseType: patch
+        incrementPerCommit: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: 'change version'
+      uses: reedyuk/npm-version@1.1.1
+      with:
+        version: ${{ steps.versioning.outputs.version}}
+        git-tag-version: 'true'
+    - name: Next Release Number   
+      run: echo "Generated version is ${{ steps.versioning.outputs.version}}"
     - name: Get Date
       id: date
       run: echo "name=date::$(date +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT

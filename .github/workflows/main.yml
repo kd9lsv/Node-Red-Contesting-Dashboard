@@ -53,7 +53,12 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
-            type=semver,pattern={{version}}
+            type=ref,event=pr
+            type=ref,event=tag
+            type=semver,pattern={{raw}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern=v{{major}}
+            type=semver,pattern=v{{major}}.{{minor}}
 
       - 
         name: Setup QEMU
@@ -82,7 +87,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node }}
             BUILD_DATE=${{ steps.date.outputs.date }}
-            BUILD_REF=${{ github.sha }}
+            BUILD_REF=${{ github.ref }}
             CONTEST_DASHBOARD_VERSION=${{ steps.meta.outpus.tags }}
             TAG_SUFFIX=${{ github.run_number }}
           push: true

@@ -29,7 +29,7 @@ jobs:
         # The tag name
         tag: v${{steps.versioning.outputs.version}}
         # The message
-        message: ${{steps.versioning.outputs.version}} Update on ${{steps.date.outputs.date}}
+        message: $npm_package_version Update on ${{steps.date.outputs.date}}
     - name: Generate changelog
       id: changelog
       uses: heinrichreimer/action-github-changelog-generator@v2.3

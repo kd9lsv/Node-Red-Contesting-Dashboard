@@ -82,5 +82,6 @@ jobs:
             BUILD_REF=${{ github.sha }}
             CONTEST_DASHBOARD_VERSION=${{ steps.meta.outpus.tags }}
             TAG_SUFFIX=${{ github.run_number }}
+          push: true
             
           tags: ${{ github.run_number }}

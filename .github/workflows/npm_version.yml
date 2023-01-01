@@ -27,7 +27,7 @@ jobs:
       uses: "kaangokdemir/github-version-bumper@master"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        VERSION_FILE_NAME: package.json
+        VERSION_FILE_NAME: 'package.json'
     - name: Next Release Number   
       run: echo "Generated version is ${{ steps.versioning.outputs.version}}"
     - name: Get Date
